@@ -1,5 +1,3 @@
-// cypress/integration/swag-labs-login.spec.js
-
 import { swagPage } from '../../support/page/swagPage';
 
 describe('Swag Labs', () => {
@@ -27,8 +25,8 @@ describe('Swag Labs', () => {
   });
 
   it('Validando cenário de erro ao clicar no botão "Login" sem preencher os campos obrigatórios', () => {
-    swagPage.userNameInput();
-    swagPage.passwordInput();
+    swagPage.userNameInput().click();
+    swagPage.passwordInput().click();
     swagPage.buttonLogin().click();
     swagPage.errorMensage().should('be.visible').and('contain', 'Epic sadface: Username is required');
   });
@@ -36,24 +34,21 @@ describe('Swag Labs', () => {
   it('Validando a funcionalidade do botão "Add to cart"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.product();
   });
 
   it('Validando a funcionalidade do botão "Remove"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonRemove().click();
   });
 
   it('Validando a funcionalidade do botão "Continue Shopping"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonContinueShopping().click();
     swagPage.titleProducts().should('contain', 'Products');
   });
@@ -61,8 +56,7 @@ describe('Swag Labs', () => {
   it('Validando a funcionalidade do botão "Checkout"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonCheckout().click();
     swagPage.titleInformation().should('contain', 'Information');
   });
@@ -70,8 +64,7 @@ describe('Swag Labs', () => {
   it('Validando mensagem de erro caso não preencha o campo "Zip/Postal Code"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonCheckout().click();
     swagPage.firstNameInput().click().type('Teste');
     swagPage.lastNameInput().click().type('Automatizado');
@@ -84,8 +77,7 @@ describe('Swag Labs', () => {
   it('Validando a funcionalidade do botão "Cancel"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonCheckout().click();
     swagPage.buttonCancel().click();
     swagPage.product().should('be.visible').and('contain', 'Sauce Labs Bike Light');
@@ -94,8 +86,7 @@ describe('Swag Labs', () => {
   it('Validando a funcionalidade "Descripition" no checkout', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonCheckout().click();
     cy.formulary();
     swagPage.descriptionCheckout().click();
@@ -105,8 +96,7 @@ describe('Swag Labs', () => {
   it('Validando a funcionalidade do botão "Finish"', () => {
     cy.login();
     swagPage.selectProduct();
-    swagPage.buttonAddToCart().click();
-    swagPage.clickCart().click();
+    cy.addToCart();
     swagPage.buttonCheckout().click()
     cy.formulary();
     swagPage.buttonFinish().click();

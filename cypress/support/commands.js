@@ -14,3 +14,10 @@ Cypress.Commands.add('formulary', (item) => {
     swagPage.postalCodeInput().click().type('04895340');
     swagPage.buttonContinue().click();
 });
+
+Cypress.Commands.add('addToCart', (item) => {
+    swagPage.buttonAddToCart().click();
+    swagPage.clickCart().click();
+
+
+});
